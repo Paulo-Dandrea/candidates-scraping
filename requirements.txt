@@ -1,2 +1,3 @@
 Flask
 mysql-connector-python==8.0.28
+Scrapy==2.5.1
