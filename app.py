@@ -4,6 +4,7 @@
 import mysql.connector
 import json
 from flask import Flask
+from mysql.connector import errorcode
 
 app = Flask(__name__)
 
@@ -38,39 +39,42 @@ def get_widgets():
     return json.dumps(json_data)
 
 
-@app.route('/add_something')
-def add_something():
-    cnx = mysql.connector.connect(
-        host="mysqldb",
-        user="root",
-        password="p@ssw0rd1",
-        database="inventory"
-    )
-    cursor = cnx.cursor()
+# @app.route('/add_something')
+def add_something(widget, description):
+    try:
+        cnx = mysql.connector.connect(
+            host="mysqldb",
+            user="root",
+            password="p@ssw0rd1",
+            database="inventory"
+        )
+        cursor = cnx.cursor()
 
-    add_employee = ("INSERT INTO widgets "
-                    "(name, description) "
-                    "VALUES (%s, %s)")
+        add_widgets = ("INSERT INTO widgets "
+                       "(name, description) "
+                       "VALUES (%s, %s)")
 
-    data_employee = ('Geert', 'Vanderkelen')
-    print('pppppppppputa')
+        data_widgets = (widget, description)
 
-    # Insert new employee
-    cursor.execute(add_employee, data_employee)
+        cursor.execute(add_widgets, data_widgets)
 
-    # Make sure data is committed to the database
-    cnx.commit()
+        cnx.commit()
 
-    cursor.close()
-    cnx.close()
+        cursor.close()
+        cnx.close()
 
-    json_data = []
+        return 'Ok - inserted'
 
-    return json.dumps(json_data)
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("Something is wrong with your user name or password")
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("Database does not exist")
+        else:
+            print('err', err)
 
 
-
-@app.route('/initdb')
+# @app.route('/initdb')
 def db_init():
     mydb = mysql.connector.connect(
         host="mysqldb",

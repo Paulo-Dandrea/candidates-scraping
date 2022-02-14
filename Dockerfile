@@ -8,6 +8,10 @@ COPY requirements.txt requirements.txt
 
 RUN pip3 install -r requirements.txt
 
+
 COPY . .
 
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+CMD ["python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+# CMD ["scrapy", "runspider" , "candidates_spider.py", "-o", "cand.jl"]
+
+# CMD bash -c "python3 -m flask run --host=0.0.0.0 && scrapy runspider candidates_spider.py -o candidates.jl"
