@@ -1,3 +1,6 @@
+from app import db_init
+from db import add_candidate
+
 import scrapy
 
 
@@ -7,15 +10,13 @@ class QuotesSpider(scrapy.Spider):
         'https://sample-university-site.herokuapp.com',
     ]
 
-    # Como passar como argumento o CPF
+    # Drop and create database
+    db_init()
 
     def parse_candidate(self, response):
-            [name, score] = response.xpath('//div/text()').getall()
+        [name, score] = response.xpath('//div/text()').getall()
 
-            yield {
-                'nome': name,
-                'score': score,
-            }
+        add_candidate(name, score)
 
     def parse(self, response):
         for candidate_href in response.css('li a::attr(href)').extract():
