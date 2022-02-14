@@ -8,7 +8,7 @@ class QuotesSpider(scrapy.Spider):
         'https://sample-university-site.herokuapp.com',
     ]
 
-    # db_init()
+    db_init()
 
     # add_something('name', 'score')
 

@@ -5,6 +5,7 @@ import mysql.connector
 import json
 from flask import Flask
 from mysql.connector import errorcode
+from subprocess import call
 
 app = Flask(__name__)
 
@@ -38,6 +39,11 @@ def get_widgets():
 
     return json.dumps(json_data)
 
+@app.route('/start-scraping')
+def start_scraping():
+    call(["scrapy", "runspider", "candidates_spider.py", "-o", "candidates.json"])
+
+    return 'Scrapy started'
 
 # @app.route('/add_something')
 def add_something(widget, description):
@@ -74,7 +80,7 @@ def add_something(widget, description):
             print('err', err)
 
 
-# @app.route('/initdb')
+@app.route('/initdb')
 def db_init():
     mydb = mysql.connector.connect(
         host="mysqldb",
