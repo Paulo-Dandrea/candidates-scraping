@@ -38,6 +38,38 @@ def get_widgets():
     return json.dumps(json_data)
 
 
+@app.route('/add_something')
+def add_something():
+    cnx = mysql.connector.connect(
+        host="mysqldb",
+        user="root",
+        password="p@ssw0rd1",
+        database="inventory"
+    )
+    cursor = cnx.cursor()
+
+    add_employee = ("INSERT INTO widgets "
+                    "(name, description) "
+                    "VALUES (%s, %s)")
+
+    data_employee = ('Geert', 'Vanderkelen')
+    print('pppppppppputa')
+
+    # Insert new employee
+    cursor.execute(add_employee, data_employee)
+
+    # Make sure data is committed to the database
+    cnx.commit()
+
+    cursor.close()
+    cnx.close()
+
+    json_data = []
+
+    return json.dumps(json_data)
+
+
+
 @app.route('/initdb')
 def db_init():
     mydb = mysql.connector.connect(

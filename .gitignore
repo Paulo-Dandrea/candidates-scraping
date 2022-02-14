@@ -1,1 +1,3 @@
-__pycache__/
+__pycache__
+__pycache__/app.cpython-38.pyc
+__pycache__/candidates_spider.cpython-38.pyc
