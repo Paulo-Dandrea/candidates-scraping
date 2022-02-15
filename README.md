@@ -26,6 +26,7 @@ Desenvolver um serviço de captura/coleta de dados e persistência em um banco d
 - Arquitetura: folders, ordenação de importações, divisão de domínios
 
 - Uso de classes
+
 - SQL: 
     - Conseguir colocar o score como FLOAT ou DECIMAL
 
