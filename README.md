@@ -11,7 +11,7 @@ Desenvolver um serviço de captura/coleta de dados e persistência em um banco d
 - Relembrar Python
 
 
-## Melhorias:
+## Melhorias futuras:
 - Validar CPF antes de colocar no banco. Para isso, preciso separa o scraper do adicionamento ao banco.
 
 - O scraper/spider:
