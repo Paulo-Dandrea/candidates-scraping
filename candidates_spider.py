@@ -11,10 +11,8 @@ class QuotesSpider(scrapy.Spider):
         'https://sample-university-site.herokuapp.com',
     ]
 
-    # Para acelerar um pouco o spider
-
     custom_settings = {
-        # 'LOG_ENABLED': False,
+        'LOG_ENABLED': False,
         'CONCURRENT_REQUESTS_PER_DOMAIN': 16,
         'CONCURRENT_REQUESTS': 32,
     }
