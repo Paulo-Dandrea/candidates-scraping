@@ -1,3 +1,5 @@
+Teste enviado por [Lucas Zago](https://github.com/luc-zago)
+
 ## Objetivo
 
 Desenvolver um serviço de captura/coleta de dados e persistência em um banco de dados.
@@ -48,4 +50,11 @@ Desenvolver um serviço de captura/coleta de dados e persistência em um banco d
 `curl http://localhost:8000/start-scraping`
 
 ### Verifique o crescimento da tabela de dados
+
+
+
+
 `curl http://localhost:8000/candidates`
+
+## Screencast
+https://user-images.githubusercontent.com/37453518/154139727-3a6b6147-d287-414e-b395-1a9386bb0746.mp4
