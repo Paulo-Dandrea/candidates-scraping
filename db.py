@@ -26,7 +26,7 @@ def get_candidates():
 
         cursor.close()
 
-        return json.dumps({'candidates': json_data, 'size': len(json_data)})
+        return json.dumps({'candidates': json_data, 'loaded_candidates': len(json_data)})
 
     # Provavelmente tem uma forma de reaproveitar este except para todos os usos
     except mysql.connector.Error as err:
@@ -38,7 +38,7 @@ def get_candidates():
             print('err', err)
 
 
-def add_candidate(name, score):
+def add_candidate(name, score, cpf):
     try:
         cnx = mysql.connector.connect(
             host="mysqldb",
@@ -49,10 +49,10 @@ def add_candidate(name, score):
         cursor = cnx.cursor()
 
         add_candidates = ("INSERT INTO candidates "
-                          "(name, score) "
-                          "VALUES (%s, %s)")
+                          "(name, score, cpf) "
+                          "VALUES (%s, %s, %s)")
 
-        data_candidates = (name, score)
+        data_candidates = (name, score, cpf)
 
         cursor.execute(add_candidates, data_candidates)
 
@@ -94,8 +94,9 @@ def db_init():
         cursor = mydb.cursor()
 
         cursor.execute("DROP TABLE IF EXISTS candidates")
+        # Score should be a float
         cursor.execute(
-            "CREATE TABLE candidates (name VARCHAR(255), score VARCHAR(255))")
+            "CREATE TABLE candidates (name VARCHAR(255), score VARCHAR(255), cpf VARCHAR(255))")
         cursor.close()
 
         return 'init database'
@@ -107,4 +108,3 @@ def db_init():
             print("Database does not exist")
         else:
             print('err', err)
-
