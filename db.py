@@ -38,6 +38,8 @@ def get_candidates():
             print('err', err)
 
 
+# Deixar aberto o banco
+
 def add_candidate(name, score, cpf):
     try:
         cnx = mysql.connector.connect(
