@@ -26,7 +26,7 @@ def get_candidates():
 
         cursor.close()
 
-        return json.dumps({'candidates': json_data, 'loaded_candidates': len(json_data)})
+        return json.dumps({'number_of_candidates': len(json_data), 'candidates': json_data})
 
     # Provavelmente tem uma forma de reaproveitar este except para todos os usos
     except mysql.connector.Error as err:
@@ -38,9 +38,7 @@ def get_candidates():
             print('err', err)
 
 
-# Deixar aberto o banco
-
-def add_candidate(name, score, cpf):
+def create_connection():
     try:
         cnx = mysql.connector.connect(
             host="mysqldb",
@@ -48,23 +46,7 @@ def add_candidate(name, score, cpf):
             password="p@ssw0rd1",
             database="sample_university"
         )
-        cursor = cnx.cursor()
-
-        add_candidates = ("INSERT INTO candidates "
-                          "(name, score, cpf) "
-                          "VALUES (%s, %s, %s)")
-
-        data_candidates = (name, score, cpf)
-
-        cursor.execute(add_candidates, data_candidates)
-
-        cnx.commit()
-
-        cursor.close()
-        cnx.close()
-
-        return 'Ok - inserted'
-
+        return cnx
     except mysql.connector.Error as err:
         if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
             print("Something is wrong with your user name or password")
@@ -72,6 +54,19 @@ def add_candidate(name, score, cpf):
             print("Database does not exist")
         else:
             print('err', err)
+
+
+def add_candidate(cnx, cursor, name, score, cpf):
+    add_candidates = ("INSERT INTO candidates "
+                      "(name, score, cpf) "
+                      "VALUES (%s, %s, %s)")
+
+    data_candidates = (name, score, cpf)
+
+    cursor.execute(add_candidates, data_candidates)
+    cnx.commit()
+
+    return 'Ok - inserted'
 
 
 def db_init():
