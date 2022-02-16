@@ -1,8 +1,12 @@
-from validate_docbr import CPF
-from helpers import Candidate
+# External libs
+from database.connection.create_connection import create_connection
 import scrapy
-from db import add_candidate, create_connection
+from validate_docbr import CPF
 from operator import itemgetter
+
+from helpers import Candidate
+
+from database.candidate.add import add_candidate
 
 cpf = CPF()
 
@@ -31,7 +35,7 @@ class CandidatesSpider(scrapy.Spider):
 
         name, score, unverified_cpf = itemgetter(
             'name', 'score', 'cpf')(cleaned_candidate)
-        
+
         if cpf.validate(unverified_cpf):
             print('isValid')
             add_candidate(self.cnx, self.cursor, name, score, unverified_cpf)

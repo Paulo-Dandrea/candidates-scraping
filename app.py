@@ -1,5 +1,7 @@
 
-from db import db_init, get_candidates
+from database.connection.create_connection import create_connection
+from database.candidate.get_all import get_all_candidates
+from database.connection.init_db import db_init
 
 from flask import Flask
 from subprocess import call
@@ -21,7 +23,10 @@ def start_scraping():
 
 @app.route('/candidates')
 def candidates():
-    return get_candidates()
+    cnx = create_connection()
+    cursor = cnx.cursor()
+
+    return get_all_candidates(cursor)
 
 
 if __name__ == "__main__":
