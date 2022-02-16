@@ -41,7 +41,7 @@ Desenvolver um serviço de captura/coleta de dados e persistência em um banco d
     - Como documentar por comentários?
     
 - Possivelmente mais higiene nos dados.
-- Calculadora de performance.
+
 
 ## Para rodar:
 
