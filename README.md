@@ -59,5 +59,8 @@ Desenvolver um serviço de captura/coleta de dados e persistência em um banco d
 
 `curl http://localhost:8000/candidates`
 
+### Pare os containers
+`sudo docker-compose -f docker-compose.dev.yml down`
+
 ## Screencast
 https://user-images.githubusercontent.com/37453518/154139727-3a6b6147-d287-414e-b395-1a9386bb0746.mp4
