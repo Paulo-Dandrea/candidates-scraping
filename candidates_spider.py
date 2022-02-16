@@ -1,10 +1,9 @@
 from helpers import Candidate
 import scrapy
-from db import add_candidate, db_init
+from db import add_candidate, create_connection
 from operator import itemgetter
 
 
-# Este spider provavelmente não deveria adicionar diretamente no banco de dados.
 class CandidatesSpider(scrapy.Spider):
     name = 'candidates'
     start_urls = [
@@ -17,24 +16,20 @@ class CandidatesSpider(scrapy.Spider):
         'CONCURRENT_REQUESTS': 32,
     }
 
-    # Drop and create database
-    db_init()
+    def __init__(self):
+        self.cnx = create_connection()
+        self.cursor = self.cnx.cursor()
 
     def parse_candidate(self, response):
         [name, score] = response.xpath('//div/text()').getall()
 
-        cleaned_candidate = Candidate(name, score, response.url).get_cleaned_candidate()
+        cleaned_candidate = Candidate(
+            name, score, response.url).get_cleaned_candidate()
 
         name, score, cpf = itemgetter(
             'name', 'score', 'cpf')(cleaned_candidate)
 
-        add_candidate(name, score, cpf)
-
-        yield {
-            'name': name,
-            'score': score,
-            'cpf': cpf,
-        }
+        add_candidate(self.cnx, self.cursor, name, score, cpf)
 
     def parse(self, response):
         for candidate_href in response.css('li a::attr(href)').extract():
@@ -43,3 +38,6 @@ class CandidatesSpider(scrapy.Spider):
         next_page = response.css('div a::attr("href")').get()
         if next_page is not None:
             yield response.follow(next_page, self.parse)
+        else:
+            self.cursor.close()
+            self.cnx.close()

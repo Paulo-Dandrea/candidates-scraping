@@ -14,7 +14,7 @@ def create_db():
 
 @app.route('/start-scraping')
 def start_scraping():
-    call(["scrapy", "runspider", "candidates_spider.py", "-o", "candidates.jl"])
+    call(["scrapy", "runspider", "candidates_spider.py"])
 
     return 'Scrapy completed'
 
