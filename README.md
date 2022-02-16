@@ -14,15 +14,6 @@ Desenvolver um serviço de captura/coleta de dados e persistência em um banco d
 
 
 ## Melhorias futuras:
-- Validar CPF antes de colocar no banco. Para isso, preciso separa o scraper do adicionamento ao banco.
-
-- O scraper/spider:
-    - Apenas pegar os dados e *não* chamar a func que adiciona ao banco, tanto para divisão de responsabilidades como por performance. NT. *Usando apenas o yield e guardando no json conseguimos pegar 1800 candidator por minuto, colocando no SQL, 1500 por minuto. Isto deve ser um processo separado*
-
-    - Outra potencial alternativa para aumento de performance seria abrir **threads** para que o adicionamento do candidato ao banco seja feito assincronamente
-
-    - @ spider não deveria resetar o banco, isto deveria ser separado.
-
 - Arquitetura: folders, ordenação de importações, divisão de domínios
 
 - Uso de classes
