@@ -1,6 +1,6 @@
 import pytest
 
-from helpers import Candidate
+from helpers.candidate_cleaner import Candidate
 
 
 def test_candidate_hygienizer():
@@ -11,7 +11,7 @@ def test_candidate_hygienizer():
 
     c2 = Candidate('   ûBer Hängson    ', '  10.15  ',
                    '/candidates-332.648.678-26')
-                   
+
     assert c2.get_cleaned_candidate(
     ) == {'name': 'uber hangson', 'score': 10.15, 'cpf': '332.648.678-26'}
 

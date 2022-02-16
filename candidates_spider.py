@@ -1,7 +1,16 @@
-from helpers import Candidate
+# External libs
 import scrapy
-from db import add_candidate, create_connection
+from validate_docbr import CPF
 from operator import itemgetter
+# helpers
+from helpers.candidate_cleaner import Candidate
+# database
+from database.candidate.add import add_candidate
+from database.connection.create_connection import create_connection
+
+
+
+cpf = CPF()
 
 
 class CandidatesSpider(scrapy.Spider):
@@ -26,10 +35,12 @@ class CandidatesSpider(scrapy.Spider):
         cleaned_candidate = Candidate(
             name, score, response.url).get_cleaned_candidate()
 
-        name, score, cpf = itemgetter(
+        name, score, unverified_cpf = itemgetter(
             'name', 'score', 'cpf')(cleaned_candidate)
 
-        add_candidate(self.cnx, self.cursor, name, score, cpf)
+        if cpf.validate(unverified_cpf):
+            print('isValid')
+            add_candidate(self.cnx, self.cursor, name, score, unverified_cpf)
 
     def parse(self, response):
         for candidate_href in response.css('li a::attr(href)').extract():
