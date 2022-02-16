@@ -1,12 +1,14 @@
 # External libs
-from database.connection.create_connection import create_connection
 import scrapy
 from validate_docbr import CPF
 from operator import itemgetter
-
-from helpers import Candidate
-
+# helpers
+from helpers.candidate_cleaner import Candidate
+# database
 from database.candidate.add import add_candidate
+from database.connection.create_connection import create_connection
+
+
 
 cpf = CPF()
 
