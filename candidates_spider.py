@@ -5,8 +5,8 @@ from operator import itemgetter
 
 
 # Este spider provavelmente não deveria adicionar diretamente no banco de dados.
-class QuotesSpider(scrapy.Spider):
-    name = 'quotes'
+class CandidatesSpider(scrapy.Spider):
+    name = 'candidates'
     start_urls = [
         'https://sample-university-site.herokuapp.com',
     ]
@@ -27,10 +27,6 @@ class QuotesSpider(scrapy.Spider):
 
         name, score, cpf = itemgetter(
             'name', 'score', 'cpf')(cleaned_candidate)
-
-    # TODO: Should I open a thread(async) for each candidate?
-    # 1500/m colocando no banco
-    # 1833/m não colocando no banco
 
         add_candidate(name, score, cpf)
 
