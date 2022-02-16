@@ -13,7 +13,7 @@ Desenvolver um serviço de captura/coleta de dados e persistência em um banco d
 
 ## Sobre o resultado:
 - São 46706 candidatos?
-- Levou **28 minutos** para raspar os dados e colocar no MySQL
+- Levou 28 minutos para raspar os dados e colocar no MySQL
 
 ## Maiores desafios e aprendizados:
 
