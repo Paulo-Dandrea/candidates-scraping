@@ -2,3 +2,4 @@ Flask
 mysql-connector-python==8.0.28
 Scrapy==2.5.1
 unidecode==1.0.22
+validate-docbr==1.10.0

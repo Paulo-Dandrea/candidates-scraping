@@ -2,7 +2,7 @@ import unidecode
 
 
 class Candidate:
-    def __init__(self, name, score, candidate_url):
+    def __init__(self, name: str, score: str, candidate_url: str):
         if not isinstance(name, str):
             raise ValueError("Name must be a string")
         self.name = name

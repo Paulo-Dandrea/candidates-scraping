@@ -56,7 +56,7 @@ def create_connection():
             print('err', err)
 
 
-def add_candidate(cnx, cursor, name, score, cpf):
+def add_candidate(cnx, cursor, name: str, score: float, cpf: str):
     add_candidates = ("INSERT INTO candidates "
                       "(name, score, cpf) "
                       "VALUES (%s, %s, %s)")
