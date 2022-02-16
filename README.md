@@ -4,6 +4,17 @@ Teste enviado por [Lucas Zago](https://github.com/luc-zago)
 
 Desenvolver um serviço de captura/coleta de dados e persistência em um banco de dados.
 
+- Este serviço deve persistir todos os dados dos aprovados (nome, CPF e score) em um banco SQL
+- Os dados devem estar normalizados no banco de dados
+- Os dados no banco de dados devem estar higienizados (sem acento ou caracteres especiais, maiúscula, etc.)
+- Os CPFs persistidos devem ser CPFs válidos
+- A utilização deve rodar através de containers (docker)
+- O código deve estar disponível em um repositório público do git
+
+## Sobre o resultado:
+- São 46706 candidatos?
+- Levou **28 minutos** para raspar os dados e colocar no MySQL
+
 ## Maiores desafios e aprendizados:
 
 - Usar o Docker + Docker Compose
