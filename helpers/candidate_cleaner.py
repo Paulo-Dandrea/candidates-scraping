@@ -18,6 +18,7 @@ class Candidate:
     def _process_name(self, name):
         name = name.strip()
         name = name.lower()
+        # Remove accents
         name = unidecode.unidecode(name)
         return name
 
