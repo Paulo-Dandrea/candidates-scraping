@@ -38,7 +38,7 @@ Desenvolver um serviço de captura/coleta de dados e persistência em um banco d
     - DB
 
 - Ser + Pythonico:
-    - Como documentar **melhor** por comentários?
+    - Como documentar melhor por comentários?
     
 - Possivelmente mais higiene nos dados.
 
