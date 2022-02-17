@@ -47,8 +47,8 @@ Desenvolver um serviço de captura/coleta de dados e persistência em um banco d
 
 ### Variáveis de ambiente
 - Crie um arquivo **.env** na raíz do projeto
-- Adicione estas variáveis:
- `HOST="mysqldb"
+- Adicione suas variáveis:
+  `HOST="mysqldb"
    USER="seu-user"
    PASSWORD="seu-password"`
 
